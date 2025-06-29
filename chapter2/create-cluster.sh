@@ -116,7 +116,7 @@ kubectl create -f nginx-ingress/nginx-deploy.yaml
 # This does assume that the first IP found is the correct IP address of the Host.  In a multi-homed system you may need to use a different
 # IP address, but we have no easy way to know the correct IP to use if there are multiple IP addresses on a Host system.
 tput setaf 3
-hostip=$(hostname  -I | cut -f1 -d' ')
+hostip=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | awk '{print $2}')
 echo -e "\n \n*******************************************************************************************************************"
 echo -e "Cluster Creation Complete.  Please see the summary below for key information that will be used in later chapters"
 echo -e "*******************************************************************************************************************"
